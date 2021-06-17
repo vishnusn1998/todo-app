@@ -65,8 +65,9 @@ function App() {
   }
 
 
-  const handleAdd = (i) => {
+  const handleAdd = (e,i) => {
 
+    e.preventDefault();
    
     if(todo === ""){
       console.log("err")
@@ -89,10 +90,15 @@ function App() {
         <h2>Never be late again !</h2>
       </div>
       <br></br>
+      <form onSubmit={handleAdd}>
       <div className="input">
-        <input style={{fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif", textTransform: "uppercase"}} value={todo} onChange={(e)=>{setTodo(e.target.value)}} type="text" placeholder="  ADD ITEM" />
-        <i style={{marginRight:"0.9rem"}} onClick={handleAdd} className="fas fa-plus" ></i>
-      </div>
+        <input onKeyPress={(e)=>{
+          if(e.keycode === 13){
+            handleAdd();
+          }
+        }} style={{fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif", textTransform: "uppercase"}} value={todo} onChange={(e)=>{setTodo(e.target.value)}} type="text" placeholder="  ADD ITEM" />
+       <button style={{border:"none", backgroundColor:"white"}} type="submit"><i style={{fontSize:"22px", marginRight:"0.9rem"}} className="fas fa-plus" ></i></button> 
+      </div></form>
      <br></br>
           <div className="todos">
       <Card className={classes.root}>
